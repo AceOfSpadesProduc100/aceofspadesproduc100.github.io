@@ -76,9 +76,9 @@ class Pokemon {
      * @param {Number} indentation
      * @returns {string}
      */
-    toJson(indentation = 2) {
-        return JSON.stringify(this, null, indentation);
-    }
+    //toJson(indentation = 2) {
+    //    return JSON.stringify(this, null, indentation);
+    //}
 
     /**
      * @returns {string}
@@ -91,10 +91,14 @@ class Pokemon {
         } else {
             str += `${this.name}`;
         }
-
+		
+		str += "\n";
+		
         if (this.gender && this.gender.match(/^[MF]$/i)) {
             str += ` (${this.gender.toUpperCase()})`;
         }
+		
+		str += "\n";
 
         if (this.item) {
             str += ` @ ${this.item}`;
@@ -105,26 +109,36 @@ class Pokemon {
         if (!isNaN(this.level)) {
             str += `Level: ${this.level}\n`;
         }
+		
+		str += "\n";
 
         if (this.ability) {
             str += `Ability: ${this.ability}\n`;
         }
+		
+		str += "\n";
 
         if (this.shiny === true) {
             str += `Shiny: Yes\n`;
         }
+		
+		str += "\n";
 
         if (!isNaN(this.happiness)) {
             str += `Happiness: ${this.happiness}\n`;
         }
+		
+		str += "\n";
 
         if (this.nature) {
             str += `${this.nature} Nature\n`;
         }
+		
+		str += "\n";
 
         if (this.evs) {
             let evs = this.evs;
-            str += `EVs: ` + ['HP', 'Atk', 'Def', 'SpA', 'SpD', 'Spe']
+            str += `EVs: ` + [':HP', ':ATTACK', ':DEFENSE', ':SPECIAL_ATTACK', ':SPECIAL_DEFENSE', ':SPEED']
                 .filter(function (prop) {
                     return !isNaN(evs[prop.toLowerCase()]);
                 })
@@ -136,10 +150,12 @@ class Pokemon {
                 )
                 .join(' / ') + '\n';
         }
+		
+		str += "\n";
 
         if (this.ivs) {
             let ivs = this.ivs;
-            str += `IVs: ` + ['HP', 'Atk', 'Def', 'SpA', 'SpD', 'Spe']
+            str += `IVs: ` + [':HP', ':ATTACK', ':DEFENSE', ':SPECIAL_ATTACK', ':SPECIAL_DEFENSE', ':SPEED']
                 .filter(function (prop) {
                     return !isNaN(ivs[prop.toLowerCase()]);
                 })
@@ -151,12 +167,16 @@ class Pokemon {
                 )
                 .join(' / ') + '\n';
         }
+		
+		str += "\n";
 
         if (this.moves) {
             str += this.moves.map(function (move) {
                 return `- ${move}`;
             }).join("\n") + "\n";
         }
+		
+		str += "\n";
 
         return str.trim();
     }
